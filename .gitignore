@@ -1,0 +1,22 @@
+# npm cache
+.npm-cache/
+
+# Dependencies and build output
+node_modules/
+dist/
+.angular/
+target/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# IDE and operating system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
