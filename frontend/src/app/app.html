@@ -1,0 +1,414 @@
+
+<div class="site-shell" id="home">
+
+  <header class="site-header">
+    <a href="#home" class="brand" (click)="closeMenu()">
+      <svg viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round"
+           aria-hidden="true">
+        <path d="M6 16c5 0 7-8 12-8a4 4 0 0 1 0 8c-5 0-7-8-12-8a4 4 0 1 0 0 8"/>
+      </svg>
+      <span>devsynk<span class="brand-dot">.</span></span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="#events">Events</a>
+      <a href="#community">Community</a>
+      <a href="#startups">Startups</a>
+      <a href="#trending">Explore</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="#community" class="nav-cta">Explore DevSynk</a>
+      <button class="menu-button" type="button"
+              [attr.aria-expanded]="menuOpen()"
+              aria-label="Toggle navigation"
+              (click)="toggleMenu()">☰</button>
+    </div>
+  </header>
+
+  @if (menuOpen()) {
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+      <a href="#home" (click)="closeMenu()">Home</a>
+      <a href="#events" (click)="closeMenu()">Events</a>
+      <a href="#community" (click)="closeMenu()">Community</a>
+      <a href="#startups" (click)="closeMenu()">Startups</a>
+      <a href="#trending" (click)="closeMenu()">Explore</a>
+    </nav>
+  }
+
+  <main>
+    <section class="hero">
+      
+
+      <div class="hero-intro">
+        
+
+<span class="eyebrow">
+  <!-- Left asterisk -->
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M12 5v14" />
+    <path d="m18.065 8.496-12.125 7" />
+    <path d="m5.94 8.504 12.125 7" />
+  </svg>
+
+  <span>THE COMMUNITY FOR PEOPLE WHO BUILD</span>
+
+  <!-- Right asterisk -->
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M12 5v14" />
+    <path d="m18.065 8.496-12.125 7" />
+    <path d="m5.94 8.504 12.125 7" />
+  </svg>
+</span>
+
+        <h1>Good things are <em>being built.</em></h1>
+        <p>
+          Discover what's happening. Meet your people.
+          Build something new.
+        </p>
+      </div>
+
+      <div class="featured-event" id="events">
+        <div class="event-copy">
+          <span class="event-kicker">THE EVENT EDIT / 0{{ activeSlide() + 1 }}</span>
+          <h2>Find your next<br /><em>big thing.</em></h2>
+          <span class="event-category">
+            {{ events[activeSlide()].category }}
+          </span>
+          <h3>{{ events[activeSlide()].title }}</h3>
+          <p>{{ events[activeSlide()].description }}</p>
+          <span class="event-location">
+            ↗ {{ events[activeSlide()].location }}
+          </span>
+        </div>
+
+        <div class="event-image">
+          @for (event of events; track $index) {
+            <img
+              [src]="event.image"
+              [alt]="'Illustrative photo for ' + event.category"
+              [class.image-active]="activeSlide() === $index"
+              [attr.aria-hidden]="activeSlide() !== $index"
+            />
+          }
+          <span class="image-sticker">WHAT'S NEXT? ✳</span>
+        </div>
+
+        <div class="event-controls">
+          <div class="slide-indicators" aria-label="Event slides">
+            @for (event of events; track $index) {
+              <button
+                type="button"
+                [class.current]="activeSlide() === $index"
+                [attr.aria-label]="'Show slide ' + ($index + 1)"
+                [attr.aria-current]="activeSlide() === $index ? 'true' : null"
+                (click)="goToSlide($index)">
+              </button>
+            }
+          </div>
+
+          <div class="slide-arrows">
+            <button type="button" aria-label="Previous event"
+                    (click)="previousSlide()">←</button>
+            <button type="button" aria-label="Next event"
+                    (click)="nextSlide()">→</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-bottom">
+        <span>BUILD TOGETHER. STAY IN SYNC.</span>
+        <span></span>
+      </div>
+    </section>
+
+    
+
+<section class="possibilities" id="community">
+  <div class="possibility-grid">
+
+    <!-- COMMUNITY CARD -->
+    <a class="possibility-card community-card" href="#projects">
+
+      <div class="card-icon">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M17 21v-1a2 2 0 00-2-2H9a2 2 0 00-2 2v1" />
+          <path d="M19 10h1a2 2 0 012 2v1" />
+          <path d="M5 10H4a2 2 0 00-2 2v1" />
+          <circle cx="12" cy="11" r="3" />
+          <circle cx="18" cy="4" r="2" />
+          <circle cx="6" cy="4" r="2" />
+        </svg>
+      </div>
+
+      <div class="card-content">
+        <h3>Community</h3>
+        <p>Meet other builders</p>
+      </div>
+
+      <svg
+        class="card-arrow"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M13 5H19V11" />
+        <path d="M19 5L5 19" />
+      </svg>
+
+    </a>
+
+    <!-- STARTUPS CARD -->
+    <a class="possibility-card startup-card" id="startups" href="#projects">
+
+      <div class="card-icon">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="m11 17 2 2a1 1 0 1 0 3-3" />
+          <path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4" />
+          <path d="m21 3 1 11h-2" />
+          <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3" />
+          <path d="M3 4h8" />
+        </svg>
+      </div>
+
+      <div class="card-content">
+        <h3>Startups</h3>
+        <p>Discover new ideas</p>
+      </div>
+
+      <svg
+        class="card-arrow"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M13 5H19V11" />
+        <path d="M19 5L5 19" />
+      </svg>
+
+    </a>
+
+  </div>
+</section>
+
+
+    
+<section class="tech-feed" id="trending">
+
+  <div class="tech-feed-heading">
+    <div class="tech-feed-heading-inner">
+
+      <div class="tech-feed-top">
+        <span>01 / THE TECH FEED</span>
+        
+<span class="tech-feed-symbol">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M12 5v14" />
+    <path d="m18.065 8.496-12.125 7" />
+    <path d="m5.94 8.504 12.125 7" />
+  </svg>
+</span>
+
+      </div>
+
+      <h2>
+        <span>THE INTERNET NEVER</span>
+        <em>stops building.</em>
+      </h2>
+
+      
+<p class="tech-feed-trending">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4" />
+  </svg>
+
+  <span>TRENDING NOW</span>
+</p>
+
+    </div>
+  </div>
+
+  <div class="tech-feed-content">
+
+    <div class="tech-feed-filters">
+      @for (category of techCategories; track category) {
+        <button
+          type="button"
+          [class.active]="activeTechCategory() === category"
+          [attr.aria-pressed]="activeTechCategory() === category"
+          (click)="setTechCategory(category)"
+        >
+          {{ category }}
+        </button>
+      }
+    </div>
+
+    <div class="tech-feed-list">
+
+      @for (story of filteredTechStories; track story.id) {
+
+        <article class="tech-story">
+
+          <img
+            class="tech-story-image"
+            [src]="story.image"
+            [alt]="story.category + ' technology illustration'"
+            loading="lazy"
+          />
+
+          <div class="tech-story-body">
+
+            <div class="tech-story-meta">
+              <span class="tech-story-source">
+                {{ story.source }}
+              </span>
+              <span class="tech-story-separator">·</span>
+              <span>{{ story.published }}</span>
+            </div>
+
+            <h4>{{ story.title }}</h4>
+
+            <p>{{ story.description }}</p>
+
+            <div class="tech-story-footer">
+              <span>{{ story.category }}</span>
+              <span class="tech-story-discussion">
+                DISCUSSION COMING SOON
+              </span>
+            </div>
+
+          </div>
+
+          <span class="tech-story-arrow" aria-hidden="true">
+            ↗
+          </span>
+
+        </article>
+
+      }
+
+    </div>
+
+    <p class="tech-feed-disclaimer">
+      Preview content. Live articles and discussions will be available
+      after backend integration.
+    </p>
+
+  </div>
+
+</section>
+
+
+    <section class="projects-section" id="projects">
+      <div class="section-intro">
+        <span class="section-kicker">BUILT BY THE COMMUNITY</span>
+        <h2>Meet the <em>makers.</em></h2>
+        <p>Creative people turning ambitious ideas into real projects.</p>
+      </div>
+
+      <article class="project-feature">
+        <div class="project-monogram">F<span>✳</span></div>
+        <div class="project-details">
+          <span class="section-kicker">PROJECT SPOTLIGHT</span>
+          <h3>FaceTally</h3>
+          <p>
+            An intelligent attendance project exploring facial recognition,
+            computer vision, and better ways to manage attendance.
+          </p>
+          <span class="project-tags">AI · COMPUTER VISION · SOFTWARE</span>
+        </div>
+        <span class="project-arrow" aria-hidden="true">↗</span>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span class="footer-brand">devsynk.</span>
+    <span>Build together. Stay in sync.</span>
+    <a href="#home">BACK TO TOP ↑</a>
+  </footer>
+
+</div>

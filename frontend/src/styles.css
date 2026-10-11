@@ -1,0 +1,203 @@
+
+/* ==========================================
+   DEVSYNK — GLOBAL STYLES
+   Theme: Lavender + Cornflower Blue
+   ========================================== */
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+/* ==========================================
+   1. DESIGN TOKENS
+   ========================================== */
+
+:root {
+  /* Brand Colors */
+  --color-primary: #8068DC;
+  --color-secondary: #6495ED;
+  --color-lavender: #DCD0FF;
+  --color-light-blue: #A3BEFF;
+
+  /* Background Colors */
+  --color-background: #F8F6FF;
+  --color-surface: #FFFFFF;
+  --color-surface-soft: #F0EAFF;
+
+  /* Text Colors */
+  --color-text: #30294F;
+  --color-text-muted: #746C90;
+
+  /* Borders */
+  --color-border: #E9E3F4;
+
+  /* Brand Gradients */
+  --gradient-primary: linear-gradient(
+    120deg,
+    #B69AFF 0%,
+    #8B8AF5 48%,
+    #6495ED 100%
+  );
+
+  --gradient-background: linear-gradient(
+    120deg,
+    #E5D9FF 0%,
+    #C8C7FF 50%,
+    #A3BEFF 100%
+  );
+
+  /* Typography */
+  --font-brand: 'Outfit', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-smooth: 0.3s ease;
+  --transition-slow: 0.6s ease;
+
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  /* Shadows */
+  --shadow-soft: 0 8px 30px rgba(80, 65, 140, 0.06);
+  --shadow-hover: 0 14px 40px rgba(80, 65, 140, 0.12);
+}
+
+/* ==========================================
+   2. GLOBAL RESET
+   ========================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+
+  background: var(--color-background);
+  color: var(--color-text);
+
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================
+   3. TYPOGRAPHY
+   ========================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-brand);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+}
+
+.devsynk-wordmark {
+  font-family: var(--font-brand);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+}
+
+p {
+  line-height: 1.7;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ==========================================
+   4. INTERACTIVE ELEMENTS
+   ========================================== */
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button,
+a {
+  transition:
+    background-color var(--transition-smooth),
+    color var(--transition-smooth),
+    border-color var(--transition-smooth),
+    box-shadow var(--transition-smooth),
+    transform var(--transition-smooth);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+/* ==========================================
+   5. MEDIA
+   ========================================== */
+
+img,
+svg,
+video {
+  max-width: 100%;
+}
+
+img {
+  display: block;
+}
+
+/* ==========================================
+   6. TEXT SELECTION
+   ========================================== */
+
+::selection {
+  background: var(--color-lavender);
+  color: var(--color-text);
+}
+
+/* ==========================================
+   7. ACCESSIBILITY
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

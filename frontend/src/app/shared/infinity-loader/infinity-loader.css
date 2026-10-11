@@ -1,0 +1,57 @@
+
+.infinity-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 24px;
+}
+
+.infinity-icon {
+  width: 70px;
+  height: 70px;
+  overflow: visible;
+}
+
+.infinity-base,
+.infinity-progress {
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.infinity-base {
+  stroke: #dcd0ff;
+}
+
+.infinity-progress {
+  stroke: #6495ed;
+  stroke-dasharray: 12 60;
+  animation: infinity-flow 1.8s linear infinite;
+}
+
+.loading-text {
+  font-family: var(--font-body, sans-serif);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-muted, #746c90);
+}
+
+@keyframes infinity-flow {
+  from {
+    stroke-dashoffset: 0;
+  }
+
+  to {
+    stroke-dashoffset: -72;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .infinity-progress {
+    animation: none;
+    stroke-dasharray: none;
+  }
+}
