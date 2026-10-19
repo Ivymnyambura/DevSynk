@@ -18,6 +18,15 @@ interface FeaturedEvent {
 export class App implements OnInit, OnDestroy {
   readonly activeSlide = signal(0);
   readonly menuOpen = signal(false);
+  readonly aiPreviewOpen = signal(false);
+
+openAiPreview(): void {
+  this.aiPreviewOpen.update(value => !value);
+}
+
+closeAiPreview(): void {
+  this.aiPreviewOpen.set(false);
+}
 
   
 readonly activeTechCategory = signal('FOR YOU');

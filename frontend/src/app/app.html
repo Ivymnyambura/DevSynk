@@ -1,43 +1,265 @@
 
 <div class="site-shell" id="home">
 
-  <header class="site-header">
+
+<header class="site-header">
+
+  <!-- LEFT: MENU + BRAND -->
+  <div class="header-left">
+
+    <button
+      class="menu-button"
+      type="button"
+      [attr.aria-expanded]="menuOpen()"
+      aria-controls="devsynk-drawer"
+      [attr.aria-label]="menuOpen() ? 'Close navigation' : 'Open navigation'"
+      (click)="toggleMenu()"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M4 7h16" />
+        <path d="M4 12h16" />
+        <path d="M4 17h16" />
+      </svg>
+    </button>
+
     <a href="#home" class="brand" (click)="closeMenu()">
-      <svg viewBox="0 0 24 24" fill="none"
-           stroke="currentColor" stroke-width="2"
-           stroke-linecap="round" stroke-linejoin="round"
-           aria-hidden="true">
-        <path d="M6 16c5 0 7-8 12-8a4 4 0 0 1 0 8c-5 0-7-8-12-8a4 4 0 1 0 0 8"/>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="30"
+        height="30"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M6 16c5 0 7-8 12-8a4 4 0 0 1 0 8c-5 0-7-8-12-8a4 4 0 1 0 0 8" />
       </svg>
       <span>devsynk<span class="brand-dot">.</span></span>
     </a>
 
-    <nav class="desktop-nav" aria-label="Main navigation">
-      <a href="#home">Home</a>
-      <a href="#events">Events</a>
-      <a href="#community">Community</a>
-      <a href="#startups">Startups</a>
-      <a href="#trending">Explore</a>
-    </nav>
+  </div>
 
-    <div class="header-actions">
-      <a href="#community" class="nav-cta">Explore DevSynk</a>
-      <button class="menu-button" type="button"
-              [attr.aria-expanded]="menuOpen()"
-              aria-label="Toggle navigation"
-              (click)="toggleMenu()">☰</button>
+  <!-- LEFT-ALIGNED DESKTOP NAVIGATION -->
+  <nav class="desktop-nav" aria-label="Main navigation">
+    <a href="#home">Home</a>
+    <a href="#events">Events</a>
+    <a href="#community">Community</a>
+    <a href="#startups">Startups</a>
+    <a href="#trending">Explore</a>
+  </nav>
+
+  <!-- RIGHT: AI + AUTHENTICATION -->
+  <div class="header-actions">
+
+    <button
+      type="button"
+      class="header-ask-ai"
+      aria-label="Ask DevSynk AI"
+      (click)="openAiPreview()"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="17"
+        height="17"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M12 3l1.9 6.1L20 11l-6.1 1.9L12 19l-1.9-6.1L4 11l6.1-1.9L12 3z" />
+        <path d="M19 18v4" />
+        <path d="M17 20h4" />
+      </svg>
+      <span>Ask AI</span>
+    </button>
+
+    <a href="/login" class="header-login">Log In</a>
+
+    <a href="/register" class="header-signup">
+      Create Account
+    </a>
+
+  </div>
+
+</header>
+
+
+@if (aiPreviewOpen()) {
+  <div class="ai-header-panel" role="dialog" aria-label="DevSynk AI preview">
+    <div class="ai-header-panel-top">
+      <strong>DevSynk AI Engineer</strong>
+      <button
+        type="button"
+        aria-label="Close AI preview"
+        (click)="closeAiPreview()"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M18 6 6 18" />
+          <path d="m6 6 12 12" />
+        </svg>
+      </button>
     </div>
-  </header>
 
-  @if (menuOpen()) {
-    <nav class="mobile-nav" aria-label="Mobile navigation">
-      <a href="#home" (click)="closeMenu()">Home</a>
-      <a href="#events" (click)="closeMenu()">Events</a>
-      <a href="#community" (click)="closeMenu()">Community</a>
-      <a href="#startups" (click)="closeMenu()">Startups</a>
-      <a href="#trending" (click)="closeMenu()">Explore</a>
-    </nav>
-  }
+    <p>Your engineering assistant for planning, debugging, and building.</p>
+    <span>AI WORKSPACE PREVIEW</span>
+  </div>
+}
+
+  
+@if (menuOpen()) {
+  <div class="drawer-backdrop" (click)="closeMenu()"></div>
+
+  <aside
+    id="devsynk-drawer"
+    class="devsynk-drawer"
+    role="dialog"
+    aria-modal="true"
+    aria-label="DevSynk navigation"
+  >
+    <div class="drawer-header">
+      <div class="drawer-brand">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M6 16c5 0 7-8 12-8a4 4 0 0 1 0 8c-5 0-7-8-12-8a4 4 0 1 0 0 8" />
+        </svg>
+        <span>devsynk.</span>
+      </div>
+
+      <button
+        class="drawer-close"
+        type="button"
+        aria-label="Close navigation"
+        (click)="closeMenu()"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M18 6 6 18" />
+          <path d="m6 6 12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer-content">
+      <p class="drawer-group-label">01 / DISCOVER</p>
+
+      <nav class="drawer-navigation" aria-label="Discover">
+        <a href="#home" (click)="closeMenu()">Home</a>
+        <a href="#events" (click)="closeMenu()">Events</a>
+        <a href="#community" (click)="closeMenu()">Community</a>
+        <a href="#startups" (click)="closeMenu()">Startups</a>
+        <a href="#projects" (click)="closeMenu()">Explore</a>
+        <a href="#trending" (click)="closeMenu()">Tech Feed</a>
+      </nav>
+
+      <div class="drawer-divider"></div>
+
+      <p class="drawer-group-label">02 / YOUR WORKSPACE</p>
+
+      
+<div class="drawer-navigation drawer-upcoming">
+  <div class="drawer-placeholder">
+    <span>Dashboard</span>
+  </div>
+
+  <div class="drawer-placeholder">
+    <span>Projects</span>
+  </div>
+
+  <div class="drawer-placeholder">
+    <span>Tasks & Bugs</span>
+  </div>
+
+  <div class="drawer-placeholder">
+    <span>Find Your People</span>
+  </div>
+</div>
+
+      <div class="drawer-divider"></div>
+
+      <p class="drawer-group-label">03 / INTELLIGENCE</p>
+
+      <div class="drawer-ai-preview">
+        <div class="drawer-ai-heading">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="21"
+            height="21"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <rect x="3" y="8" width="18" height="12" rx="2" />
+            <path d="M12 4v4" />
+            <path d="M9 4h6" />
+            <path d="M8 13h.01" />
+            <path d="M16 13h.01" />
+            <path d="M9 17h6" />
+          </svg>
+          <span>AI Engineer</span>
+        </div>
+        <p>Your intelligent engineering partner.</p>
+      </div>
+    </div>
+
+    <div class="drawer-footer">
+      <span>BUILD TOGETHER.</span>
+      <span>STAY IN SYNC.</span>
+    </div>
+  </aside>
+}
+
 
   <main>
     <section class="hero">
@@ -87,10 +309,7 @@
 </span>
 
         <h1>Good things are <em>being built.</em></h1>
-        <p>
-          Discover what's happening. Meet your people.
-          Build something new.
-        </p>
+        
       </div>
 
       <div class="featured-event" id="events">
@@ -142,115 +361,13 @@
       </div>
 
       <div class="hero-bottom">
-        <span>BUILD TOGETHER. STAY IN SYNC.</span>
+        <span>BUILD TOGETHER. STAY IN SYNK.</span>
         <span></span>
       </div>
     </section>
 
     
 
-<section class="possibilities" id="community">
-  <div class="possibility-grid">
-
-    <!-- COMMUNITY CARD -->
-    <a class="possibility-card community-card" href="#projects">
-
-      <div class="card-icon">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M17 21v-1a2 2 0 00-2-2H9a2 2 0 00-2 2v1" />
-          <path d="M19 10h1a2 2 0 012 2v1" />
-          <path d="M5 10H4a2 2 0 00-2 2v1" />
-          <circle cx="12" cy="11" r="3" />
-          <circle cx="18" cy="4" r="2" />
-          <circle cx="6" cy="4" r="2" />
-        </svg>
-      </div>
-
-      <div class="card-content">
-        <h3>Community</h3>
-        <p>Meet other builders</p>
-      </div>
-
-      <svg
-        class="card-arrow"
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M13 5H19V11" />
-        <path d="M19 5L5 19" />
-      </svg>
-
-    </a>
-
-    <!-- STARTUPS CARD -->
-    <a class="possibility-card startup-card" id="startups" href="#projects">
-
-      <div class="card-icon">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <path d="m11 17 2 2a1 1 0 1 0 3-3" />
-          <path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4" />
-          <path d="m21 3 1 11h-2" />
-          <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3" />
-          <path d="M3 4h8" />
-        </svg>
-      </div>
-
-      <div class="card-content">
-        <h3>Startups</h3>
-        <p>Discover new ideas</p>
-      </div>
-
-      <svg
-        class="card-arrow"
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M13 5H19V11" />
-        <path d="M19 5L5 19" />
-      </svg>
-
-    </a>
-
-  </div>
-</section>
 
 
     
@@ -263,22 +380,7 @@
         <span>01 / THE TECH FEED</span>
         
 <span class="tech-feed-symbol">
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    aria-hidden="true"
-  >
-    <path d="M12 5v14" />
-    <path d="m18.065 8.496-12.125 7" />
-    <path d="m5.94 8.504 12.125 7" />
-  </svg>
+  
 </span>
 
       </div>
@@ -382,33 +484,525 @@
 </section>
 
 
-    <section class="projects-section" id="projects">
-      <div class="section-intro">
-        <span class="section-kicker">BUILT BY THE COMMUNITY</span>
-        <h2>Meet the <em>makers.</em></h2>
-        <p>Creative people turning ambitious ideas into real projects.</p>
+<!-- SECTION TRANSITION -->
+<div class="section-transition" aria-hidden="true">
+  <span>DISCOVER WHAT'S BEING BUILT</span>
+
+  
+</div>
+
+
+<!-- ======================================
+     02 / BUILT IN PUBLIC
+     ====================================== -->
+
+<section class="build-public" id="built-in-public">
+
+  <div class="build-public-container">
+
+    <div class="build-public-header">
+      <div class="build-public-heading">
+        <span class="build-public-kicker">
+          02 / BUILT IN PUBLIC
+        </span>
+
+        <h2>
+          Good work deserves
+          <em>to be seen.</em>
+        </h2>
+
+        <p>
+          The ideas, progress, and little victories behind
+          the things people are building.
+        </p>
       </div>
 
-      <article class="project-feature">
-        <div class="project-monogram">F<span>✳</span></div>
-        <div class="project-details">
-          <span class="section-kicker">PROJECT SPOTLIGHT</span>
-          <h3>FaceTally</h3>
+      <svg
+        class="build-public-symbol"
+        xmlns="http://www.w3.org/2000/svg"
+        width="30"
+        height="30"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M12 5v14" />
+        <path d="m18.065 8.496-12.125 7" />
+        <path d="m5.94 8.504 12.125 7" />
+      </svg>
+    </div>
+
+    <div class="build-public-feed">
+
+      <!-- UPDATE 01 -->
+      <article class="build-update">
+
+        <div class="build-update-avatar">FT</div>
+
+        <div class="build-update-content">
+
+          <div class="build-update-meta">
+            <span class="build-update-name">FaceTally</span>
+            <span class="build-update-type">PROJECT UPDATE</span>
+          </div>
+
+          <h3>
+            Making attendance smarter with computer vision.
+          </h3>
+
           <p>
-            An intelligent attendance project exploring facial recognition,
-            computer vision, and better ways to manage attendance.
+            Exploring facial recognition and intelligent attendance
+            tracking to simplify everyday classroom workflows.
           </p>
-          <span class="project-tags">AI · COMPUTER VISION · SOFTWARE</span>
+
+          <span class="build-update-tag">
+            AI / COMPUTER VISION
+          </span>
+
         </div>
-        <span class="project-arrow" aria-hidden="true">↗</span>
+
+        <svg
+          class="build-update-arrow"
+          xmlns="http://www.w3.org/2000/svg"
+          width="21"
+          height="21"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M13 5H19V11" />
+          <path d="M19 5L5 19" />
+        </svg>
+
       </article>
-    </section>
+
+      <!-- UPDATE 02 -->
+      <article class="build-update">
+
+        <div class="build-update-avatar">JM</div>
+
+        <div class="build-update-content">
+
+          <div class="build-update-meta">
+            <span class="build-update-name">Jirani Mart</span>
+            <span class="build-update-type">DESIGN JOURNAL</span>
+          </div>
+
+          <h3>
+            Designing a better everyday shopping experience.
+          </h3>
+
+          <p>
+            Bringing a neighborhood supermarket and bakery
+            online with a simple, thoughtful shopping interface.
+          </p>
+
+          <span class="build-update-tag">
+            DESIGN / E-COMMERCE
+          </span>
+
+        </div>
+
+        <svg
+          class="build-update-arrow"
+          xmlns="http://www.w3.org/2000/svg"
+          width="21"
+          height="21"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M13 5H19V11" />
+          <path d="M19 5L5 19" />
+        </svg>
+
+      </article>
+
+      <!-- UPDATE 03 -->
+      <article class="build-update">
+
+        <div class="build-update-avatar">DS</div>
+
+        <div class="build-update-content">
+
+          <div class="build-update-meta">
+            <span class="build-update-name">DevSynk AI</span>
+            <span class="build-update-type">BUILD LOG</span>
+          </div>
+
+          <h3>
+            Building an intelligent partner for software teams.
+          </h3>
+
+          <p>
+            Experimenting with agentic AI to help developers
+            understand repositories, debug code, and plan solutions.
+          </p>
+
+          <span class="build-update-tag">
+            AGENTIC AI / ENGINEERING
+          </span>
+
+        </div>
+
+        <svg
+          class="build-update-arrow"
+          xmlns="http://www.w3.org/2000/svg"
+          width="21"
+          height="21"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M13 5H19V11" />
+          <path d="M19 5L5 19" />
+        </svg>
+
+      </article>
+
+    </div>
+
+    
+
+  </div>
+
+</section>
+
+
+<!-- =====================================
+     03 / FIND YOUR PEOPLE
+     ===================================== -->
+
+<section class="find-people" id="collaborators">
+  <div class="find-people-inner">
+
+    <div class="find-people-top">
+      <span>03 / COLLABORATION</span>
+
+      <!-- Lucide Users Round -->
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+    </div>
+
+    <div class="find-people-layout">
+
+      <!-- LEFT: INTRODUCTION -->
+      <div class="find-people-copy">
+        <h2>Find your <em>people.</em></h2>
+
+        <p>
+          Discover developers, designers, and founders
+          with the skills and interests that complement yours.
+        </p>
+
+        <a href="#collaborator-discovery" class="find-people-cta">
+          Explore collaborators
+
+          <!-- Lucide Arrow Up Right -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M13 5H19V11"/>
+            <path d="M19 5L5 19"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- RIGHT: SKILL DISCOVERY -->
+      <div class="find-people-discovery" id="collaborator-discovery">
+
+        <div class="find-people-search">
+          <!-- Lucide Search -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="19"
+            height="19"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+          </svg>
+
+          <span>Search by skill or role</span>
+        </div>
+
+        <div class="find-people-skills">
+          <span>Frontend</span>
+          <span>Backend</span>
+          <span>UI/UX Design</span>
+          <span>AI & ML</span>
+          <span>DevOps</span>
+          <span>Mobile Development</span>
+        </div>
+
+        <div class="find-people-discovery-bottom">
+          <span>SKILL DISCOVERY</span>
+
+          <!-- Lucide Arrow Up Right -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M13 5H19V11"/>
+            <path d="M19 5L5 19"/>
+          </svg>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+    
+<!-- 04 — MEET THE MAKERS -->
+<section class="projects-section" id="projects">
+  <div class="makers-container">
+
+    <div class="makers-heading">
+      <span class="makers-kicker">04 / MEET THE MAKERS</span>
+
+      <h2>
+        Behind every build, <em>a builder.</em>
+      </h2>
+    </div>
+
+    <article class="maker-feature">
+
+      <!-- Featured developer -->
+      <div class="maker-profile">
+        <div class="maker-avatar" aria-hidden="true">
+          <span>IN</span>
+        </div>
+
+        <div class="maker-identity">
+          <span class="maker-label">FEATURED MAKER</span>
+          <h3>Ivy Nyambura</h3>
+          <p>Software Developer</p>
+        </div>
+
+        <div class="maker-divider"></div>
+
+        <p class="maker-description">
+          Building thoughtful digital experiences and exploring
+          how artificial intelligence can solve practical problems.
+        </p>
+
+        <div class="maker-skills">
+          <span>FRONTEND</span>
+          <span>AI & ML</span>
+          <span>UI/UX</span>
+        </div>
+      </div>
+
+      <!-- Featured project -->
+      <div class="maker-project">
+
+        <div class="maker-project-top">
+          <span class="maker-label">PROJECT SPOTLIGHT / 001</span>
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M7 17 17 7"/>
+            <path d="M7 7h10v10"/>
+          </svg>
+        </div>
+
+        <div class="maker-project-visual" aria-hidden="true">
+          <div class="maker-project-mark">
+            <span>F</span>
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="27"
+              height="27"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 5v14"/>
+              <path d="m18.065 8.496-12.125 7"/>
+              <path d="m5.94 8.504 12.125 7"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="maker-project-info">
+          <div>
+            <h3>FaceTally</h3>
+            <p>
+              An intelligent attendance system using facial
+              recognition and computer vision to streamline
+              attendance management.
+            </p>
+          </div>
+
+          <div class="maker-project-tags">
+            <span>AI</span>
+            <span>COMPUTER VISION</span>
+            <span>PYTHON</span>
+          </div>
+        </div>
+
+      </div>
+
+    </article>
+
+  </div>
+</section>
+
   </main>
 
-  <footer class="site-footer">
-    <span class="footer-brand">devsynk.</span>
-    <span>Build together. Stay in sync.</span>
-    <a href="#home">BACK TO TOP ↑</a>
-  </footer>
+  
+<!-- DEVSYNK FOOTER -->
+<footer class="site-footer">
+  <div class="footer-container">
+
+    <div class="footer-main">
+
+      <!-- Brand -->
+      <div class="footer-brand">
+        
+<a href="#home" class="footer-logo" aria-label="DevSynk home">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="38"
+    height="38"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M6 16c5 0 7-8 12-8a4 4 0 0 1 0 8c-5 0-7-8-12-8a4 4 0 1 0 0 8"/>
+  </svg>
+  <span class="footer-wordmark">devsynk.</span>
+</a>
+
+
+        <p>
+          A space for developers, designers, and founders
+          to connect, collaborate, and build.
+        </p>
+      </div>
+
+      <!-- Explore -->
+      <nav class="footer-links" aria-label="Explore">
+        <h3>EXPLORE</h3>
+        <a href="#tech-feed">Tech Feed</a>
+        <a href="#events">Events</a>
+        <a href="#projects">Meet the Makers</a>
+      </nav>
+
+      <!-- Platform -->
+      <nav class="footer-links" aria-label="Platform">
+        <h3>PLATFORM</h3>
+        <a href="#collaborator-discovery">Find Your People</a>
+        <a href="/register">Create Account</a>
+      </nav>
+
+    </div>
+
+    
+<div class="footer-bottom">
+  <div class="footer-credits">
+    <span>© 2026 DevSynk. All rights reserved.</span>
+    <span>Designed thoughtfully by Ivy Nyambura.</span>
+  </div>
+
+  <a href="#home" class="footer-back-top">
+    BACK TO TOP
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="15"
+      height="15"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M12 19V5"/>
+      <path d="m5 12 7-7 7 7"/>
+    </svg>
+  </a>
+</div>
+
+
+  </div>
+</footer>
+
 
 </div>
