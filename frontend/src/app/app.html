@@ -751,35 +751,65 @@
       <!-- RIGHT: SKILL DISCOVERY -->
       <div class="find-people-discovery" id="collaborator-discovery">
 
-        <div class="find-people-search">
-          <!-- Lucide Search -->
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="19"
-            height="19"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <circle cx="11" cy="11" r="8"/>
-            <path d="m21 21-4.35-4.35"/>
-          </svg>
+        
+<!-- Interactive skill search -->
+<div class="find-people-search">
 
-          <span>Search by skill or role</span>
-        </div>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="19"
+    height="19"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <circle cx="11" cy="11" r="8"/>
+    <path d="m21 21-4.35-4.35"/>
+  </svg>
 
-        <div class="find-people-skills">
-          <span>Frontend</span>
-          <span>Backend</span>
-          <span>UI/UX Design</span>
-          <span>AI & ML</span>
-          <span>DevOps</span>
-          <span>Mobile Development</span>
-        </div>
+  <input
+    type="search"
+    aria-label="Search by skill or role"
+    placeholder="Search by skill or role"
+    [value]="skillSearch()"
+    (input)="updateSkillSearch($event)"
+  />
+
+</div>
+
+<!-- Filterable skill chips -->
+<div class="find-people-skills">
+
+  @for (skill of filteredDiscoverySkills(); track skill) {
+    <button
+      type="button"
+      class="discovery-skill"
+      (click)="selectDiscoverySkill(skill)"
+    >
+      {{ skill }}
+    </button>
+  } @empty {
+    <p class="discovery-empty">
+      No matching skills found.
+    </p>
+  }
+
+</div>
+
+@if (skillSearch()) {
+  <button
+    type="button"
+    class="discovery-clear"
+    (click)="clearSkillSearch()"
+  >
+    Clear search
+  </button>
+}
+
 
         <div class="find-people-discovery-bottom">
           <span>SKILL DISCOVERY</span>
@@ -954,6 +984,62 @@
           A space for developers, designers, and founders
           to connect, collaborate, and build.
         </p>
+
+        
+<!-- DevSynk social media — future accounts -->
+<div class="footer-socials" aria-label="DevSynk social media">
+
+  <!-- GitHub -->
+  <span class="footer-social-icon" title="GitHub — coming soon">
+    <svg xmlns="http://www.w3.org/2000/svg"
+      width="19" height="19" viewBox="0 0 24 24"
+      fill="none" stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round"
+      aria-hidden="true">
+      <path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 19 4.77 5.07 5.07 0 0 0 18.91 1S17.73.65 15 2.48a13.38 13.38 0 0 0-7 0C5.27.65 4.09 1 4.09 1A5.07 5.07 0 0 0 4 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 8 18.13V22"/>
+    </svg>
+  </span>
+
+  <!-- LinkedIn -->
+  <span class="footer-social-icon" title="LinkedIn — coming soon">
+    <svg xmlns="http://www.w3.org/2000/svg"
+      width="19" height="19" viewBox="0 0 24 24"
+      fill="none" stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round"
+      aria-hidden="true">
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/>
+      <rect width="4" height="12" x="2" y="9"/>
+      <circle cx="4" cy="4" r="2"/>
+    </svg>
+  </span>
+
+  <!-- Instagram -->
+  <span class="footer-social-icon" title="Instagram — coming soon">
+    <svg xmlns="http://www.w3.org/2000/svg"
+      width="19" height="19" viewBox="0 0 24 24"
+      fill="none" stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round"
+      aria-hidden="true">
+      <rect width="20" height="20" x="2" y="2" rx="5"/>
+      <circle cx="12" cy="12" r="4"/>
+      <path d="M17.5 6.5h.01"/>
+    </svg>
+  </span>
+
+  <!-- X / Twitter -->
+  <span class="footer-social-icon" title="X — coming soon">
+    <svg xmlns="http://www.w3.org/2000/svg"
+      width="19" height="19" viewBox="0 0 24 24"
+      fill="none" stroke="currentColor" stroke-width="1.8"
+      stroke-linecap="round" stroke-linejoin="round"
+      aria-hidden="true">
+      <path d="M18.9 2H22l-6.8 7.8L23 22h-6.1l-4.8-7.4L5.6 22H2.5l7.3-8.4L2 2h6.3l4.4 6.9L18.9 2z"/>
+    </svg>
+  </span>
+
+</div>
+
+
       </div>
 
       <!-- Explore -->

@@ -1,5 +1,5 @@
 
-import { Component, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, computed, signal } from '@angular/core';
 
 interface FeaturedEvent {
   category: string;
@@ -16,6 +16,45 @@ interface FeaturedEvent {
   styleUrl: './app.css',
 })
 export class App implements OnInit, OnDestroy {
+  
+/* Find Your People — interactive skill discovery */
+
+readonly skillSearch = signal('');
+
+readonly discoverySkills = [
+  'Frontend',
+  'Backend',
+  'UI/UX Design',
+  'AI & ML',
+  'DevOps',
+  'Mobile Development'
+];
+
+readonly filteredDiscoverySkills = computed(() => {
+  const query = this.skillSearch().trim().toLowerCase();
+
+  if (!query) {
+    return this.discoverySkills;
+  }
+
+  return this.discoverySkills.filter(skill =>
+    skill.toLowerCase().includes(query)
+  );
+});
+
+updateSkillSearch(event: Event): void {
+  const input = event.target as HTMLInputElement;
+  this.skillSearch.set(input.value);
+}
+
+selectDiscoverySkill(skill: string): void {
+  this.skillSearch.set(skill);
+}
+
+clearSkillSearch(): void {
+  this.skillSearch.set('');
+}
+
   readonly activeSlide = signal(0);
   readonly menuOpen = signal(false);
   readonly aiPreviewOpen = signal(false);

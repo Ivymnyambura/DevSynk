@@ -3660,3 +3660,288 @@ button {
 .footer-credits span:last-child {
   color: #7654bc;
 }
+
+/* =========================================
+   FIND YOUR PEOPLE — SEARCH INTERACTIONS
+   ========================================= */
+
+/* Preserve the existing search container */
+
+.find-people-search {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.find-people-search:focus-within {
+  border-color: #7654bc;
+  box-shadow: 0 0 0 3px rgba(118, 84, 188, 0.12);
+}
+
+.find-people-search svg {
+  flex-shrink: 0;
+}
+
+.find-people-search input {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #39276f;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 13px;
+}
+
+.find-people-search input::placeholder {
+  color: #81788d;
+  opacity: 1;
+}
+
+.find-people-search input::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
+/* Skill chips retain their existing appearance */
+
+.find-people-skills .discovery-skill {
+  font: inherit;
+  color: inherit;
+  background: inherit;
+  border: inherit;
+  border-radius: inherit;
+  padding: inherit;
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.find-people-skills .discovery-skill:hover {
+  background: #39276f;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.find-people-skills .discovery-skill:focus-visible {
+  outline: 2px solid #7654bc;
+  outline-offset: 3px;
+}
+
+/* Empty state */
+
+.discovery-empty {
+  margin: 0;
+  color: #71687e;
+  font-size: 12px;
+}
+
+/* Clear search */
+
+.discovery-clear {
+  display: inline-flex;
+  align-self: flex-start;
+  margin-top: 10px;
+  padding: 4px 0;
+  border: 0;
+  background: transparent;
+  color: #7654bc;
+  font-family: "Space Mono", monospace;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.discovery-clear:hover {
+  text-decoration: underline;
+}
+
+/* Mobile adjustments */
+
+@media (max-width: 600px) {
+  .find-people-search input {
+    font-size: 12px;
+  }
+
+  .find-people-skills {
+    gap: 8px;
+  }
+}
+
+/* ==========================================
+   DEVSYNK — HOMEPAGE FINAL POLISH
+   ========================================== */
+
+/* 01. Smooth navigation */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 85px;
+}
+
+section[id],
+div[id] {
+  scroll-margin-top: 85px;
+}
+
+/* 02. Consistent interactive transitions */
+
+a,
+button {
+  transition:
+    color 0.22s ease,
+    background-color 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    opacity 0.22s ease,
+    transform 0.22s ease;
+}
+
+/* 03. Refined link interaction */
+
+.site-footer a:hover {
+  color: #7654bc;
+}
+
+.site-footer a:focus-visible,
+.find-people-discovery button:focus-visible {
+  outline: 2px solid #7654bc;
+  outline-offset: 4px;
+}
+
+/* 04. Interactive discovery panel */
+
+.find-people-discovery {
+  transition:
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.find-people-discovery:hover {
+  box-shadow: 0 12px 32px rgba(57, 39, 111, 0.08);
+}
+
+.find-people-search {
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.find-people-search:focus-within {
+  border-color: #7654bc;
+  box-shadow: 0 0 0 3px rgba(118, 84, 188, 0.12);
+}
+
+/* 05. Meet the Makers subtle interaction */
+
+.maker-profile,
+.maker-project {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+@media (hover: hover) {
+  .maker-profile:hover,
+  .maker-project:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(15, 8, 38, 0.12);
+  }
+}
+
+/* 06. Improve tap responsiveness */
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  touch-action: manipulation;
+}
+
+/* 07. Respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================
+   DEVSYNK — FOOTER SOCIAL ICONS
+   ========================================== */
+
+.footer-socials {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.footer-social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 39px;
+  height: 39px;
+  border: 1px solid #e4def0;
+  border-radius: 11px;
+  background: #fff;
+  color: #39276f;
+  cursor: default;
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.footer-social-icon svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+@media (hover: hover) {
+  .footer-social-icon:hover {
+    color: #7654bc;
+    border-color: #a9b8ff;
+    background: #f0ebfa;
+    transform: translateY(-2px);
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-socials {
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .footer-social-icon {
+    width: 37px;
+    height: 37px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-social-icon {
+    transition: none;
+  }
+}
