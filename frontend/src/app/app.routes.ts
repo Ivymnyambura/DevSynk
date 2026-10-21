@@ -1,3 +1,11 @@
-import { Routes } from '@angular/router';
 
-export const routes: Routes = [];
+import { Routes } from '@angular/router';
+import { Events } from './pages/events/events';
+
+export const routes: Routes = [
+  {
+    path: 'events',
+    component: Events,
+    title: 'Events | DevSynk',
+  },
+];

@@ -1,5 +1,6 @@
 
-import { Component, OnDestroy, OnInit, computed, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, computed, inject, signal } from '@angular/core';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 interface FeaturedEvent {
   category: string;
@@ -11,11 +12,12 @@ interface FeaturedEvent {
 
 @Component({
   selector: 'app-root',
-  imports: [],
+  imports: [RouterLink, RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
 export class App implements OnInit, OnDestroy {
+  readonly router = inject(Router);
   
 /* Find Your People — interactive skill discovery */
 

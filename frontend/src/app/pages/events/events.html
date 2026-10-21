@@ -1,0 +1,359 @@
+
+<section class="events-page">
+
+  <!-- EVENTS HERO -->
+  <div class="events-hero">
+    <div class="events-hero-inner">
+      <span class="events-eyebrow">01 / THE CALENDAR</span>
+
+      <div class="events-heading">
+        <h1>EVENTS.</h1>
+        <p></p>
+      </div>
+
+      <p class="events-description">
+        Discover what's happening in tech. Find your next
+        hackathon, meetup, workshop, or conference.
+      </p>
+    </div>
+  </div>
+
+  <div class="events-content">
+
+    <!-- PERSONAL SCHEDULE INTRO -->
+    <div class="events-next-section">
+      <span>02 / YOUR SCHEDULE</span>
+      <h2>Your calendar, <em>your community.</em></h2>
+      <p>
+        Keep track of the events you're attending and discover
+        what's coming up next.
+      </p>
+    </div>
+
+    <!-- CALENDAR AND RIGHT COLUMN -->
+    <div class="events-schedule-grid">
+
+      <!-- PERSONAL EVENT CALENDAR -->
+      <section class="events-calendar-card" aria-label="Event calendar">
+
+        <div class="calendar-top">
+          <div>
+            <span class="calendar-eyebrow">YOUR CALENDAR</span>
+            <h3>{{ monthLabel() }}</h3>
+          </div>
+
+          <div class="calendar-controls">
+            <button
+              type="button"
+              aria-label="Previous month"
+              (click)="changeMonth(-1)"
+            >
+              <svg viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="1.8"
+                   stroke-linecap="round" stroke-linejoin="round"
+                   aria-hidden="true">
+                <path d="m15 18-6-6 6-6"/>
+              </svg>
+            </button>
+
+            <button
+              type="button"
+              aria-label="Next month"
+              (click)="changeMonth(1)"
+            >
+              <svg viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="1.8"
+                   stroke-linecap="round" stroke-linejoin="round"
+                   aria-hidden="true">
+                <path d="m9 18 6-6-6-6"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="calendar-weekdays">
+          @for (weekday of weekdays; track $index) {
+            <span>{{ weekday }}</span>
+          }
+        </div>
+
+        <div class="calendar-days">
+          @for (day of calendarDays(); track $index) {
+            @if (day !== null) {
+              <button
+                type="button"
+                class="calendar-day"
+                [class.is-today]="isToday(day)"
+                [class.is-selected]="isSelected(day)"
+                [attr.aria-label]="'Select day ' + day"
+                [attr.aria-pressed]="isSelected(day)"
+                (click)="selectDay(day)"
+              >
+                {{ day }}
+              </button>
+            } @else {
+              <span class="calendar-day-empty"></span>
+            }
+          }
+        </div>
+
+        <div class="calendar-bottom">
+          <span class="calendar-legend-dot"></span>
+          <span>Today</span>
+          <span class="calendar-bottom-note">
+            Select a date to explore your schedule
+          </span>
+        </div>
+
+      </section>
+
+      <!-- RIGHT COLUMN -->
+      <div class="events-right-column">
+
+        <!-- SEARCH AND FILTERS -->
+        <div class="events-search-panel">
+
+          <div class="events-search-header">
+            <span>DISCOVER / EXPLORE</span>
+            <span>FIND YOUR NEXT EXPERIENCE</span>
+          </div>
+
+          <div class="events-search-bar">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="21"
+              height="21"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="11" cy="11" r="8"/>
+              <path d="m21 21-4.35-4.35"/>
+            </svg>
+
+            <input
+              type="search"
+              placeholder="Search events, hackathons, meetups..."
+              aria-label="Search events"
+              [value]="searchQuery()"
+              (input)="updateSearch($event)"
+            />
+
+            @if (searchQuery()) {
+              <button
+                type="button"
+                class="events-clear-search"
+                (click)="clearFilters()"
+              >
+                Clear
+              </button>
+            }
+          </div>
+
+          <div
+            class="events-filters"
+            aria-label="Filter events by category"
+          >
+            @for (category of categories; track category) {
+              <button
+                type="button"
+                [class.active]="activeCategory() === category"
+                [attr.aria-pressed]="activeCategory() === category"
+                (click)="setCategory(category)"
+              >
+                {{ category }}
+              </button>
+            }
+          </div>
+
+        </div>
+
+        <!-- UPCOMING EVENTS PANEL -->
+        <section class="events-upcoming-card">
+
+          <div class="upcoming-top">
+            <div>
+              <span class="calendar-eyebrow">COMING UP</span>
+              <h3>Your upcoming events</h3>
+            </div>
+
+            <span class="upcoming-count">00 EVENTS</span>
+          </div>
+
+          <div class="upcoming-empty">
+            <div class="upcoming-empty-icon">
+              <svg viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="1.5"
+                   stroke-linecap="round" stroke-linejoin="round"
+                   aria-hidden="true">
+                <rect x="3" y="5" width="18" height="16" rx="2"/>
+                <path d="M7 3v4M17 3v4M3 10h18"/>
+                <path d="m9 16 2 2 4-4"/>
+              </svg>
+            </div>
+
+            <h4>Your next experience starts here.</h4>
+
+            <p>
+              Sign in to save events, manage your schedule,
+              and keep track of what you're attending.
+            </p>
+
+            <span class="upcoming-status">
+              Event tracking coming soon
+            </span>
+          </div>
+
+          <div class="upcoming-footer">
+            <span></span>
+            <span>DEVSYNK</span>
+          </div>
+
+        </section>
+
+      </div>
+    </div>
+
+    <!-- TRENDING IN TECH -->
+    <section class="events-discovery-section">
+
+      <div class="discovery-section-heading">
+        <div>
+          <span class="section-index">03 / DISCOVER</span>
+          <h2>Trending in <em>tech.</em></h2>
+          <p>
+            Conversations, communities, and experiences worth exploring.
+          </p>
+        </div>
+
+        <span class="section-label">THE COMMUNITY EDIT</span>
+      </div>
+
+      <div class="events-list">
+
+        @for (event of trendingEvents(); track event.id) {
+          <article class="discovery-event-row">
+
+            <div class="event-date-block">
+              <strong>{{ event.day }}</strong>
+              <span>{{ event.month }}</span>
+            </div>
+
+            <div class="event-row-details">
+              <span class="event-type-label">{{ event.type }}</span>
+              <h3>{{ event.title }}</h3>
+              <p>{{ event.description }}</p>
+            </div>
+
+            <div class="event-row-end">
+              <span>{{ event.location }}</span>
+
+              <span class="event-arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="1.8"
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 17 17 7M8 7h9v9"/>
+                </svg>
+              </span>
+            </div>
+
+          </article>
+        } @empty {
+          <div class="events-no-results">
+            No tech events match your current filters.
+          </div>
+        }
+
+      </div>
+    </section>
+
+    <!-- HACKATHONS -->
+    <section class="events-discovery-section hackathons-section">
+
+      <div class="discovery-section-heading">
+        <div>
+          <span class="section-index">04 / BUILD & COMPETE</span>
+          <h2>Hackathons<span class="heading-period">.</span></h2>
+          <p>
+            Build something meaningful. Meet your next collaborators.
+          </p>
+        </div>
+
+        <span class="section-label">FOR THE BUILDERS</span>
+      </div>
+
+      <div class="events-list">
+
+        @for (event of hackathonEvents(); track event.id) {
+          <article class="discovery-event-row">
+
+            <div class="event-date-block">
+              <strong>{{ event.day }}</strong>
+              <span>{{ event.month }}</span>
+            </div>
+
+            <div class="event-row-details">
+              <span class="event-type-label">{{ event.type }}</span>
+              <h3>{{ event.title }}</h3>
+              <p>{{ event.description }}</p>
+            </div>
+
+            <div class="event-row-end">
+              <span>{{ event.location }}</span>
+
+              <span class="event-arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="1.8"
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 17 17 7M8 7h9v9"/>
+                </svg>
+              </span>
+            </div>
+
+          </article>
+        } @empty {
+          <div class="events-no-results">
+            No hackathons match your current filters.
+          </div>
+        }
+
+      </div>
+    </section>
+
+    <!-- FOR EVENT ORGANIZERS -->
+    <section class="events-organizer-banner">
+
+      <div class="organizer-copy">
+        <span>05 / FOR THE ORGANIZERS</span>
+
+        <h2>Got something <em>going on?</em></h2>
+
+        <p>
+          Hosting a hackathon, developer meetup, workshop, or tech event?
+          DevSynk is building a space to help you reach your community.
+        </p>
+      </div>
+
+      <div class="organizer-action">
+        <span><h2>SUBMIT YOUR EVENT</h2></span>
+
+        <svg viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round"
+             aria-hidden="true">
+          <path d="M7 17 17 7M8 7h9v9"/>
+        </svg>
+      </div>
+
+    </section>
+
+    <p class="events-demo-note">
+      
+    </p>
+
+  </div>
+</section>

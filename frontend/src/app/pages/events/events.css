@@ -1,0 +1,1399 @@
+
+/* =========================================
+   DEVSYNK — EVENTS PAGE
+   ========================================= */
+
+:host {
+  display: block;
+}
+
+.events-page {
+  min-height: 100vh;
+  background: #f8f6ff;
+  color: #39276f;
+}
+
+/* =========================================
+   01 / EVENTS HERO
+   ========================================= */
+
+.events-hero {
+  position: relative;
+  overflow: hidden;
+  background: #39276f;
+  padding: 64px 6% 72px;
+}
+
+.events-hero::after {
+  content: "";
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  right: -95px;
+  top: -130px;
+  border: 1px solid rgba(169, 184, 255, 0.18);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.events-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1220px;
+  margin: 0 auto;
+}
+
+.events-eyebrow {
+  display: block;
+  font-family: "Space Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 1.3px;
+  color: #b8f28b;
+}
+
+.events-heading {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin-top: 15px;
+}
+
+.events-heading h1 {
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(70px, 10vw, 138px);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -6px;
+  color:  #b8f28b;
+  transition: color 0.25s ease;
+}
+
+.events-heading p {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 15px;
+  color: #ffffff;
+}
+
+.events-description {
+  max-width: 520px;
+  margin: 22px 0 0;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 13px;
+  line-height: 1.8;
+  color: #d8d0ee;
+}
+
+/* =========================================
+   02 / EVENTS CONTENT
+   ========================================= */
+
+.events-content {
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 44px 6% 90px;
+}
+
+/* =========================================
+   EVENT SEARCH
+   ========================================= */
+
+.events-search-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  font-family: "Space Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.8px;
+  color: #7654bc;
+}
+
+.events-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 18px 20px;
+  border: 1px solid #ded7ed;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #7654bc;
+  box-shadow: 0 6px 24px rgba(57, 39, 111, 0.035);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.events-search-bar:focus-within {
+  border-color: #7654bc;
+  box-shadow: 0 0 0 3px rgba(118, 84, 188, 0.1);
+}
+
+.events-search-bar svg {
+  flex-shrink: 0;
+}
+
+.events-search-bar input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #39276f;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 13px;
+}
+
+.events-search-bar input::placeholder {
+  color: #928ba4;
+}
+
+.events-search-bar input::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
+.events-clear-search {
+  border: none;
+  background: transparent;
+  color: #7654bc;
+  font-family: "Space Mono", monospace;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.events-clear-search:hover {
+  color: #39276f;
+}
+
+/* =========================================
+   CATEGORY FILTERS
+   ========================================= */
+
+.events-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 18px;
+}
+
+.events-filters button {
+  padding: 10px 15px;
+  border: 1px solid #ded7ed;
+  border-radius: 30px;
+  background: transparent;
+  color: #7654bc;
+  font-family: "Space Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.events-filters button:hover {
+  border-color: #7654bc;
+  background: #f0ebfa;
+}
+
+.events-filters button.active {
+  border-color: #39276f;
+  background: #39276f;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(57, 39, 111, 0.12);
+}
+
+.events-filters button.active:hover {
+  background: #39276f;
+}
+
+/* Keyboard accessibility */
+
+.events-filters button:focus-visible,
+.events-clear-search:focus-visible {
+  outline: 2px solid #7654bc;
+  outline-offset: 3px;
+}
+
+/* =========================================
+   03 / PERSONAL SCHEDULE INTRO
+   ========================================= */
+
+.events-next-section {
+  position: relative;
+  margin-top: 24px;
+  padding: 56px 0 20px;
+  border-top: 1px solid #ded7ed;
+}
+
+.events-next-section > span {
+  font-family: "Space Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: #7654bc;
+}
+
+.events-next-section h2 {
+  margin: 13px 0 12px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(29px, 4vw, 48px);
+  line-height: 1.15;
+  letter-spacing: -1.8px;
+  color: #39276f;
+}
+
+.events-next-section h2 em {
+  font-family: "Syne", sans-serif;
+  font-style: italic;
+  color: #7654bc;
+}
+
+.events-next-section > p {
+  max-width: 520px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 13px;
+  line-height: 1.8;
+  color: #756b88;
+}
+
+/* =========================================
+   04 / TABLET
+   ========================================= */
+
+@media (max-width: 900px) {
+  .events-hero {
+    padding: 60px 6% 65px;
+  }
+
+  .events-heading h1 {
+    font-size: clamp(70px, 11vw, 110px);
+    letter-spacing: -4px;
+  }
+
+  .events-content {
+    padding-top: 36px;
+  }
+}
+
+/* =========================================
+   05 / MOBILE
+   ========================================= */
+
+@media (max-width: 700px) {
+  .events-hero {
+    padding: 50px 6% 56px;
+  }
+
+  .events-hero::after {
+    width: 180px;
+    height: 180px;
+    right: -100px;
+    top: -80px;
+  }
+
+  .events-heading {
+    gap: 10px;
+  }
+
+  .events-heading h1 {
+    font-size: clamp(65px, 16vw, 100px);
+    letter-spacing: -4px;
+  }
+
+  .events-heading p {
+    width: 100%;
+    font-size: 13px;
+  }
+
+  .events-description {
+    font-size: 12px;
+  }
+
+  .events-content {
+    padding: 30px 6% 65px;
+  }
+
+  .events-search-header span:last-child {
+    display: none;
+  }
+
+  .events-search-bar {
+    padding: 15px;
+  }
+
+  .events-search-bar input {
+    font-size: 12px;
+  }
+
+  .events-filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scrollbar-width: none;
+  }
+
+  .events-filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .events-filters button {
+    flex-shrink: 0;
+  }
+
+  .events-next-section {
+    margin-top: 16px;
+    padding-top: 45px;
+  }
+}
+
+/* =========================================
+   06 / SMALL MOBILE
+   ========================================= */
+
+@media (max-width: 400px) {
+  .events-heading h1 {
+    font-size: 62px;
+    letter-spacing: -3px;
+  }
+
+  .events-search-bar {
+    gap: 10px;
+    padding: 13px;
+  }
+
+  .events-search-bar input {
+    font-size: 11px;
+  }
+
+  .events-filters button {
+    padding: 9px 12px;
+    font-size: 9px;
+  }
+}
+
+/* =========================================
+   ACCESSIBILITY
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .events-heading h1,
+  .events-search-bar,
+  .events-filters button {
+    transition: none;
+  }
+}
+
+/* =========================================
+   PERSONAL SCHEDULE GRID
+   ========================================= */
+
+.events-schedule-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 20px;
+  margin-top: 22px;
+}
+
+.events-calendar-card,
+.events-upcoming-card {
+  min-width: 0;
+  background: #ffffff;
+  border: 1px solid #e4def0;
+  border-radius: 16px;
+  padding: 27px;
+}
+
+.calendar-top,
+.upcoming-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.calendar-eyebrow {
+  font-family: "Space Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: #7654bc;
+}
+
+.calendar-top h3,
+.upcoming-top h3 {
+  margin: 9px 0 0;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 22px;
+  letter-spacing: -0.8px;
+  color: #39276f;
+}
+
+.calendar-controls {
+  display: flex;
+  gap: 7px;
+}
+
+.calendar-controls button {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid #e4def0;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #39276f;
+  cursor: pointer;
+}
+
+.calendar-controls button:hover {
+  background: #f0ebfa;
+}
+
+.calendar-controls svg {
+  width: 16px;
+  height: 16px;
+}
+
+.calendar-weekdays,
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 5px;
+}
+
+.calendar-weekdays {
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.calendar-weekdays span {
+  text-align: center;
+  font-family: "Space Mono", monospace;
+  font-size: 10px;
+  color: #928ba4;
+}
+
+.calendar-day,
+.calendar-day-empty {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  min-width: 0;
+}
+
+.calendar-day {
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: transparent;
+  color: #39276f;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.calendar-day:hover {
+  background: #f0ebfa;
+}
+
+.calendar-day.is-today {
+  border-color: #7654bc;
+  color: #7654bc;
+  font-weight: 700;
+}
+
+.calendar-day.is-selected,
+.calendar-day.is-selected:hover {
+  border-color: #39276f;
+  background: #39276f;
+  color: #ffffff;
+}
+
+.calendar-bottom {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 23px;
+  padding-top: 17px;
+  border-top: 1px solid #eee9f5;
+  font-family: "Space Mono", monospace;
+  font-size: 9px;
+  color: #756b88;
+}
+
+.calendar-legend-dot {
+  width: 8px;
+  height: 8px;
+  border: 1px solid #7654bc;
+  border-radius: 50%;
+}
+
+.calendar-bottom-note {
+  margin-left: auto;
+  text-align: right;
+}
+
+/* =========================================
+   UPCOMING EVENTS
+   ========================================= */
+
+.events-upcoming-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.upcoming-count {
+  padding: 7px 10px;
+  border-radius: 6px;
+  background: #f0ebfa;
+  color: #7654bc;
+  font-family: "Space Mono", monospace;
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.upcoming-empty {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 42px 20px;
+  text-align: center;
+}
+
+.upcoming-empty-icon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  background: #f0ebfa;
+  color: #7654bc;
+}
+
+.upcoming-empty-icon svg {
+  width: 29px;
+  height: 29px;
+}
+
+.upcoming-empty h4 {
+  margin: 20px 0 9px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 20px;
+  letter-spacing: -0.6px;
+  color: #39276f;
+}
+
+.upcoming-empty p {
+  max-width: 300px;
+  margin: 0;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12px;
+  line-height: 1.8;
+  color: #756b88;
+}
+
+.upcoming-status {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 11px 17px;
+  border: 1px solid #ded7ed;
+  border-radius: 30px;
+  font-family: "Space Mono", monospace;
+  font-size: 10px;
+  color: #7654bc;
+}
+
+.upcoming-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 17px;
+  border-top: 1px solid #eee9f5;
+  font-family: "Space Mono", monospace;
+  font-size: 9px;
+  color: #928ba4;
+}
+
+/* =========================================
+   TRENDING & HACKATHONS
+   ========================================= */
+
+.events-discovery-section {
+  margin-top: 85px;
+}
+
+.discovery-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.section-index,
+.section-label {
+  font-family: "Space Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: #7654bc;
+}
+
+.discovery-section-heading h2 {
+  margin: 13px 0 10px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(34px, 4.5vw, 56px);
+  line-height: 1.1;
+  letter-spacing: -2px;
+  color: #39276f;
+}
+
+.discovery-section-heading h2 em {
+  font-family: "Syne", sans-serif;
+  color: #7654bc;
+}
+
+.heading-period {
+  color: #7654bc;
+}
+
+.discovery-section-heading p {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #756b88;
+}
+
+.events-list {
+  border-top: 1px solid #ded7ed;
+}
+
+.discovery-event-row {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 25px;
+  padding: 23px 10px;
+  border-bottom: 1px solid #ded7ed;
+  transition: background 0.2s ease;
+}
+
+.discovery-event-row:hover {
+  background: #f0ebfa;
+}
+
+.event-date-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border: 1px solid #ded7ed;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.event-date-block strong {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 27px;
+  line-height: 1;
+  color: #39276f;
+}
+
+.event-date-block span {
+  margin-top: 5px;
+  font-family: "Space Mono", monospace;
+  font-size: 10px;
+  color: #7654bc;
+}
+
+.event-type-label {
+  font-family: "Space Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: #7654bc;
+}
+
+.event-row-details h3 {
+  margin: 7px 0;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 20px;
+  letter-spacing: -0.5px;
+  color: #39276f;
+}
+
+.event-row-details p {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #756b88;
+}
+
+.event-row-end {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  font-family: "Space Mono", monospace;
+  font-size: 10px;
+  color: #756b88;
+}
+
+.event-arrow {
+  display: grid;
+  place-items: center;
+  width: 37px;
+  height: 37px;
+  border: 1px solid #ded7ed;
+  border-radius: 50%;
+  color: #39276f;
+}
+
+.event-arrow svg {
+  width: 17px;
+  height: 17px;
+}
+
+.events-no-results {
+  padding: 32px 10px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 13px;
+  color: #756b88;
+}
+
+.hackathons-section {
+  margin-top: 72px;
+}
+
+/* =========================================
+   ORGANIZER BANNER
+   ========================================= */
+
+.events-organizer-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  margin-top: 85px;
+  padding: 35px 40px;
+  border-radius: 14px;
+  background: #b8f28b;
+  color: #39276f;
+}
+
+.organizer-copy > span {
+  font-family: "Space Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.organizer-copy h2 {
+  margin: 12px 0;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(27px, 3.5vw, 42px);
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+}
+
+.organizer-copy h2 em {
+  font-family: "Syne", sans-serif;
+}
+
+.organizer-copy p {
+  max-width: 520px;
+  margin: 0;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.organizer-action {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  font-family: "Space Mono", monospace;
+  font-size: 10px;
+}
+
+.organizer-action svg {
+  width: 22px;
+  height: 22px;
+}
+
+.events-demo-note {
+  margin: 25px 0 0;
+  font-family: "Space Mono", monospace;
+  font-size: 10px;
+  line-height: 1.8;
+  color: #928ba4;
+}
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 900px) {
+  .events-schedule-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .events-upcoming-card {
+    min-height: 310px;
+  }
+
+  .discovery-event-row {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 700px) {
+  .events-calendar-card,
+  .events-upcoming-card {
+    padding: 20px;
+  }
+
+  .events-discovery-section {
+    margin-top: 65px;
+  }
+
+  .discovery-section-heading {
+    margin-bottom: 22px;
+  }
+
+  .section-label {
+    display: none;
+  }
+
+  .discovery-event-row {
+    grid-template-columns: 60px minmax(0, 1fr);
+    gap: 14px;
+    padding: 19px 0;
+  }
+
+  .event-date-block {
+    width: 58px;
+    height: 64px;
+  }
+
+  .event-date-block strong {
+    font-size: 23px;
+  }
+
+  .event-row-details h3 {
+    font-size: 17px;
+  }
+
+  .event-row-end {
+    grid-column: 2;
+    justify-content: space-between;
+  }
+
+  .event-arrow {
+    width: 30px;
+    height: 30px;
+  }
+
+  .events-organizer-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 65px;
+    padding: 27px;
+  }
+
+  .organizer-action {
+    flex-shrink: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .discovery-event-row {
+    transition: none;
+  }
+}
+
+/* =========================================
+   EVENTS PAGE — COMPACT VERTICAL SPACING
+   ========================================= */
+
+/* Reduce the purple hero height */
+.events-hero {
+  padding-top: 30px;
+  padding-bottom: 34px;
+}
+
+/* Keep the heading prominent but more compact */
+.events-heading {
+  margin-top: 8px;
+  gap: 14px;
+}
+
+.events-heading h1 {
+  font-size: clamp(60px, 8vw, 100px);
+}
+
+.events-description {
+  margin-top: 10px;
+}
+
+/* Bring search and filters closer to the hero */
+.events-content {
+  padding-top: 24px;
+}
+
+.events-filters {
+  margin-top: 12px;
+}
+
+/* Reduce space before the calendar */
+.events-next-section {
+  margin-top: 14px;
+  padding-top: 26px;
+  padding-bottom: 8px;
+}
+
+.events-next-section h2 {
+  margin-top: 8px;
+  margin-bottom: 6px;
+}
+
+.events-next-section > p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* Pull calendar cards closer to the introduction */
+.events-schedule-grid {
+  margin-top: 12px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 700px) {
+  .events-hero {
+    padding-top: 28px;
+    padding-bottom: 30px;
+  }
+
+  .events-heading h1 {
+    font-size: clamp(55px, 13vw, 85px);
+  }
+
+  .events-content {
+    padding-top: 20px;
+  }
+
+  .events-next-section {
+    margin-top: 10px;
+    padding-top: 22px;
+  }
+}
+.events-schedule-grid {
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: stretch;
+  gap: 20px;
+  margin-top: 14px;
+}
+
+.events-right-column {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 12px;
+}
+
+.events-search-panel {
+  padding: 17px 20px;
+  border: 1px solid #e4def0;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.events-search-header {
+  margin-bottom: 9px;
+}
+
+.events-search-bar {
+  padding: 11px 14px;
+  box-shadow: none;
+}
+
+.events-filters {
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.events-filters button {
+  padding: 7px 10px;
+  font-size: 9px;
+}
+
+.events-upcoming-card {
+  flex: 1;
+  min-height: 250px;
+}
+
+.events-content {
+  padding-top: 18px;
+}
+
+.events-next-section {
+  margin-top: 0;
+  padding-top: 12px;
+  padding-bottom: 4px;
+  border-top: none;
+}
+
+.events-next-section h2 {
+  margin-top: 6px;
+  margin-bottom: 4px;
+}
+
+.events-next-section > p {
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .events-schedule-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .events-search-panel {
+    padding: 15px;
+  }
+
+  .events-content {
+    padding-top: 16px;
+  }
+}
+
+/* =========================================
+   DEVSYNK — EDITORIAL EVENT DISCOVERY
+   ========================================= */
+
+.editorial-events {
+  margin-top: 74px;
+}
+
+.editorial-event-list {
+  margin-top: 26px;
+  border-top: 1px solid #e2ddec;
+}
+
+.editorial-event {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr) 26px;
+  align-items: center;
+  gap: 22px;
+  padding: 20px 16px;
+  border-bottom: 1px solid #e2ddec;
+  transition: background 0.25s ease, padding 0.25s ease;
+}
+
+.editorial-event:hover {
+  background: #f0ebfa;
+  padding-left: 22px;
+}
+
+/* One highlighted event per section */
+.editorial-event-featured {
+  background: #e8ebff;
+  border-radius: 13px;
+  border-bottom: 0;
+  margin: 14px 0 6px;
+  padding: 19px;
+}
+
+.editorial-event-featured:hover {
+  background: #dfe5ff;
+}
+
+/* Event imagery */
+.editorial-event-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 9px;
+  background: #e2ddec;
+}
+
+.editorial-event-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.editorial-event:hover .editorial-event-image img {
+  transform: scale(1.055);
+}
+
+.editorial-featured-label {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  background: #39276f;
+  color: #b8f28b;
+  padding: 6px 8px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  border-radius: 4px;
+}
+
+/* Host profile */
+.editorial-event-info {
+  min-width: 0;
+}
+
+.editorial-host-line,
+.editorial-event-meta,
+.editorial-event-bottom {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.editorial-host-line {
+  margin-bottom: 10px;
+}
+
+.editorial-host-avatar {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #39276f;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.editorial-host-name {
+  color: #39276f;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.editorial-demo-label {
+  color: #796f8b;
+  font-size: 9px;
+  letter-spacing: 0.07em;
+}
+
+/* Event information */
+.editorial-event-meta {
+  color: #7654bc;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-weight: 700;
+}
+
+.editorial-meta-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #7654bc;
+}
+
+.editorial-event-info h3 {
+  color: #39276f;
+  font-size: clamp(19px, 2.2vw, 27px);
+  line-height: 1.15;
+  margin: 7px 0;
+  letter-spacing: -0.03em;
+}
+
+.editorial-event-info p {
+  color: #766e82;
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.editorial-event-bottom {
+  margin-top: 11px;
+}
+
+.editorial-event-date {
+  color: #39276f;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.editorial-event-tag {
+  background: #e9e5f6;
+  color: #7654bc;
+  border-radius: 4px;
+  padding: 5px 7px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.editorial-event-featured .editorial-event-tag {
+  background: #f8f6ff;
+}
+
+/* Animated SVG arrow */
+.editorial-event-arrow {
+  color: #7654bc;
+  align-self: center;
+  transition: transform 0.25s ease;
+}
+
+.editorial-event-arrow svg {
+  width: 21px;
+  height: 21px;
+}
+
+.editorial-event:hover .editorial-event-arrow {
+  transform: translate(4px, -4px);
+}
+
+/* Responsive layout */
+@media (max-width: 700px) {
+  .editorial-events {
+    margin-top: 48px;
+  }
+
+  .editorial-event {
+    grid-template-columns: 100px minmax(0, 1fr) 18px;
+    gap: 12px;
+    padding: 16px 6px;
+  }
+
+  .editorial-event-featured {
+    padding: 12px;
+  }
+
+  .editorial-event:hover {
+    padding-left: 10px;
+  }
+
+  .editorial-event-info h3 {
+    font-size: 17px;
+  }
+
+  .editorial-event-info p {
+    display: none;
+  }
+
+  .editorial-host-line {
+    gap: 5px;
+    margin-bottom: 6px;
+  }
+
+  .editorial-host-avatar {
+    width: 23px;
+    height: 23px;
+    font-size: 9px;
+  }
+
+  .editorial-host-name {
+    font-size: 10px;
+  }
+
+  .editorial-demo-label {
+    font-size: 8px;
+  }
+
+  .editorial-event-meta {
+    font-size: 9px;
+  }
+
+  .editorial-event-bottom {
+    margin-top: 8px;
+  }
+
+  .editorial-featured-label {
+    font-size: 7px;
+  }
+}
+
+@media (max-width: 390px) {
+  .editorial-event {
+    grid-template-columns: 82px minmax(0, 1fr) 16px;
+    gap: 9px;
+  }
+
+  .editorial-event-info h3 {
+    font-size: 15px;
+  }
+}
+
+/* =========================================
+   CALENDAR HEIGHT FIX
+   ========================================= */
+
+/* Prevent the calendar from stretching vertically */
+.events-schedule-grid {
+  align-items: start;
+}
+
+.events-calendar-card {
+  align-self: start;
+  height: auto;
+  min-height: 0;
+}
+
+/* Keep the right column independent */
+.events-right-column {
+  align-self: start;
+}
+
+/* =========================================
+   PERIWINKLE SECTION HEADERS
+   Trending in Tech + Hackathons only
+   ========================================= */
+
+.events-discovery-section .discovery-section-heading {
+  background: #e4e9ff;
+  border: 1px solid #dce2ff;
+  border-radius: 12px;
+  padding: 26px 30px;
+  margin-bottom: 20px;
+}
+
+/* Make the headings stand out */
+.events-discovery-section .discovery-section-heading h2 {
+  color: #39276f;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+/* Retain the violet accent */
+.events-discovery-section .discovery-section-heading h2 em,
+.events-discovery-section .discovery-section-heading .heading-period {
+  color: #7654bc;
+}
+
+/* Keep the small editorial labels readable */
+.events-discovery-section .discovery-section-heading .section-index,
+.events-discovery-section .discovery-section-heading .section-label {
+  color: #7654bc;
+}
+
+/* Keep the description subtle */
+.events-discovery-section .discovery-section-heading p {
+  color: #665d80;
+}
+
+/* Mobile adjustments */
+@media (max-width: 700px) {
+  .events-discovery-section .discovery-section-heading {
+    padding: 20px;
+    border-radius: 10px;
+  }
+}

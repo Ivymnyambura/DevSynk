@@ -56,7 +56,7 @@
   <!-- LEFT-ALIGNED DESKTOP NAVIGATION -->
   <nav class="desktop-nav" aria-label="Main navigation">
     <a href="#home">Home</a>
-    <a href="#events">Events</a>
+   <a routerLink="/events">Events</a>
     <a href="#community">Community</a>
     <a href="#startups">Startups</a>
     <a href="#trending">Explore</a>
@@ -99,6 +99,7 @@
   </div>
 
 </header>
+
 
 
 @if (aiPreviewOpen()) {
@@ -192,7 +193,7 @@
 
       <nav class="drawer-navigation" aria-label="Discover">
         <a href="#home" (click)="closeMenu()">Home</a>
-        <a href="#events" (click)="closeMenu()">Events</a>
+        <a routerLink="/events" (click)="closeMenu()">Events</a>
         <a href="#community" (click)="closeMenu()">Community</a>
         <a href="#startups" (click)="closeMenu()">Startups</a>
         <a href="#projects" (click)="closeMenu()">Explore</a>
@@ -260,6 +261,9 @@
   </aside>
 }
 
+@if (router.url === '/events') {
+  <router-outlet />
+} @else {
 
   <main>
     <section class="hero">
@@ -950,7 +954,7 @@
 </section>
 
   </main>
-
+}
   
 <!-- DEVSYNK FOOTER -->
 <footer class="site-footer">
@@ -1046,7 +1050,7 @@
       <nav class="footer-links" aria-label="Explore">
         <h3>EXPLORE</h3>
         <a href="#tech-feed">Tech Feed</a>
-        <a href="#events">Events</a>
+        <a routerLink="/events">Events</a>
         <a href="#projects">Meet the Makers</a>
       </nav>
 
