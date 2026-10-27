@@ -1,0 +1,579 @@
+
+<div class="admin-shell">
+
+  <!-- ADMIN SIDEBAR -->
+  <aside class="admin-sidebar">
+    <div class="admin-brand">
+      <span class="brand-symbol">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M6 16c5 0 7-8 12-8a4 4 0 0 1 0 8c-5 0-7-8-12-8a4 4 0 1 0 0 8" />
+  </svg>
+</span>
+      <span>devsynk<span class="brand-period">.</span></span>
+    </div>
+
+    <div class="sidebar-caption">ADMIN WORKSPACE</div>
+
+    <nav class="admin-navigation" aria-label="Admin navigation">
+      <a class="nav-item active" href="#event-management">
+        <span class="nav-icon">
+  <svg xmlns="http://www.w3.org/2000/svg"
+       viewBox="0 0 24 24"
+       fill="none"
+       stroke="currentColor"
+       stroke-width="1.8"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       aria-hidden="true">
+    <rect x="3" y="3" width="18" height="18" rx="2"/>
+    <path d="M3 9h18"/>
+    <path d="M9 3v18"/>
+  </svg>
+</span>
+        Event Studio
+      </a>
+
+      <a class="nav-item" href="#ai-engineer">
+        <span class="nav-icon">
+  <svg xmlns="http://www.w3.org/2000/svg"
+       viewBox="0 0 24 24"
+       fill="none"
+       stroke="currentColor"
+       stroke-width="1.8"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       aria-hidden="true">
+    <path d="M12 3l1.9 6.1L20 11l-6.1 1.9L12 19l-1.9-6.1L4 11l6.1-1.9L12 3z"/>
+    <path d="M19 18v4"/>
+    <path d="M17 20h4"/>
+  </svg>
+</span>
+        AI Engineer
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <span class="sidebar-status-dot"></span>
+      Admin Studio · 
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="admin-main" id="event-management">
+
+    <header class="admin-topbar">
+      <div class="admin-breadcrumb">
+        DEVSYNK <span>/</span> ADMIN <span>/</span> EVENTS
+      </div>
+
+      <a href="/" class="back-to-site">
+        View website <span aria-hidden="true">↗</span>
+      </a>
+    </header>
+
+    <section class="admin-welcome">
+      <div>
+        <div class="admin-eyebrow">YOUR CREATIVE CONTROL CENTER</div>
+        <h1>Event Studio<span>.</span></h1>
+        <p>Create, curate, and manage what's happening in tech.</p>
+      </div>
+
+      <button
+        type="button"
+        class="create-event-btn"
+        (click)="openCreateModal()"
+      >
+        <span aria-hidden="true">+</span>
+        Create New
+      </button>
+    </section>
+
+    <!-- OVERVIEW -->
+    <section class="admin-stats" aria-label="Event statistics">
+      <div class="stat-item">
+        <span class="stat-label">TOTAL LISTINGS</span>
+        <strong>{{ totalEvents() }}</strong>
+        <span class="stat-caption">Events and hackathons</span>
+      </div>
+
+      <div class="stat-item">
+        <span class="stat-label">PUBLISHED</span>
+        <strong>{{ publishedEvents() }}</strong>
+        <span class="stat-caption">Marked as published locally</span>
+      </div>
+
+      <div class="stat-item">
+        <span class="stat-label">DRAFTS</span>
+        <strong>{{ draftEvents() }}</strong>
+        <span class="stat-caption">Still in progress</span>
+      </div>
+    </section>
+
+    <!-- EVENT MANAGEMENT -->
+    <section class="admin-listings">
+      <div class="section-heading">
+        <div>
+          <div class="admin-eyebrow">MANAGE YOUR CONTENT</div>
+          <h2>All listings<span>.</span></h2>
+        </div>
+        <button
+          type="button"
+          class="secondary-create-btn"
+          (click)="openCreateModal('hackathon')"
+        >
+          + New Hackathon
+        </button>
+      </div>
+
+      <div class="listing-toolbar">
+        <input
+          type="search"
+          placeholder="Search events or organizers..."
+          aria-label="Search listings"
+          [ngModel]="searchQuery()"
+          (ngModelChange)="searchQuery.set($event)"
+        />
+
+        <select
+          aria-label="Filter listing status"
+          [ngModel]="statusFilter()"
+          (ngModelChange)="statusFilter.set($event)"
+        >
+          <option value="all">All statuses</option>
+          <option value="published">Published</option>
+          <option value="draft">Drafts</option>
+        </select>
+      </div>
+
+      <div class="listing-table">
+        <div class="listing-table-head">
+          <span>EVENT / HACKATHON</span>
+          <span>TYPE</span>
+          <span>STATUS</span>
+          <span>ACTIONS</span>
+        </div>
+
+        @for (item of filteredListings(); track item.id) {
+          <div class="listing-row">
+            <div class="listing-primary">
+              <strong>{{ item.title }}</strong>
+              <span>{{ item.organizer }}</span>
+            </div>
+
+            <span class="listing-type">{{ item.type }}</span>
+
+            <span
+              class="listing-status"
+              [class.status-published]="item.status === 'published'"
+            >
+              {{ item.status }}
+            </span>
+
+            <div class="listing-actions">
+              <button
+                type="button"
+                (click)="openEditModal(item)"
+                aria-label="Edit listing"
+              >
+                Edit
+              </button>
+
+              <button
+                type="button"
+                class="delete-action"
+                (click)="deleteListing(item.id)"
+                aria-label="Delete listing"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        } @empty {
+          <div class="empty-listings">
+            <span class="empty-icon">✳</span>
+            <h3>No listings here yet.</h3>
+            <p>Create your first event or hackathon to get started.</p>
+
+            <button
+              type="button"
+              class="empty-create-btn"
+              (click)="openCreateModal()"
+            >
+              + Create your first listing
+            </button>
+          </div>
+        }
+      </div>
+    </section>
+
+    <!-- AI ENGINEER -->
+    <section class="ai-engineer-panel" id="ai-engineer">
+      <div class="ai-panel-content">
+        <div class="ai-eyebrow">YOUR ENGINEERING COMPANION</div>
+        <h2>DevSynk AI Engineer<span>.</span></h2>
+        <p>
+          A dedicated space for repository analysis,
+          coding assistance, and intelligent engineering workflows.
+        </p>
+        <span class="ai-coming-soon">WORKSPACE COMING SOON ↗</span>
+      </div>
+      <div class="ai-panel-mark" aria-hidden="true">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M6 16c5 0 7-8 12-8a4 4 0 0 1 0 8c-5 0-7-8-12-8a4 4 0 1 0 0 8"/>
+  </svg>
+</div>
+    </section>
+
+  </main>
+</div>
+
+<!-- CREATE / EDIT MODAL -->
+@if (modalOpen()) {
+  <div class="modal-backdrop" (click)="closeModal()">
+    <section
+      class="event-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+      (click)="$event.stopPropagation()"
+    >
+      <div class="modal-header">
+        <div>
+          <div class="admin-eyebrow">DEVSYNK / EVENT STUDIO</div>
+          <h2 id="modal-title">
+            {{ editingId() ? 'Edit listing' : 'Create something new' }}<span>.</span>
+          </h2>
+        </div>
+
+        <button
+          type="button"
+          class="modal-close"
+          aria-label="Close modal"
+          (click)="closeModal()"
+        >
+          ×
+        </button>
+      </div>
+
+      <div class="modal-scroll-content">
+
+        <div class="listing-type-selector">
+          <button
+            type="button"
+            [class.selected]="form.type === 'event'"
+            (click)="form.type = 'event'"
+          >
+            Event
+          </button>
+          <button
+            type="button"
+            [class.selected]="form.type === 'hackathon'"
+            (click)="form.type = 'hackathon'"
+          >
+            Hackathon
+          </button>
+        </div>
+
+        <div class="form-section">
+          <h3>01 / The essentials</h3>
+
+          <label>
+            Listing title *
+            <input
+              type="text"
+              [(ngModel)]="form.title"
+              placeholder="Give your event a name"
+            />
+          </label>
+
+          <div class="form-grid">
+            <label>
+              Category
+              <select [(ngModel)]="form.category">
+                <option value="TECH">Technology</option>
+                <option value="AI / ML">AI / Machine Learning</option>
+                <option value="MEETUPS">Meetups</option>
+                <option value="WORKSHOPS">Workshops</option>
+                <option value="HACKATHONS">Hackathons</option>
+                <option value="CONFERENCES">Conferences</option>
+                <option value="OTHER">Other</option>
+              </select>
+            </label>
+
+            <label>
+              Organizer *
+              <input
+                type="text"
+                [(ngModel)]="form.organizer"
+                placeholder="Organization name"
+              />
+            </label>
+          </div>
+
+          <label>
+            Description
+            <textarea
+              rows="4"
+              [(ngModel)]="form.description"
+              placeholder="Tell developers what this is all about..."
+            ></textarea>
+          </label>
+
+          <label>
+            Additional information
+            <textarea
+              rows="3"
+              [(ngModel)]="form.additionalInfo"
+              placeholder="Important details, what to bring, accessibility, FAQs..."
+            ></textarea>
+          </label>
+        </div>
+
+        <div class="form-section">
+          <h3>02 / When and where</h3>
+
+          <div class="form-grid">
+            <label>
+              Start date
+              <input type="date" [(ngModel)]="form.startDate" />
+            </label>
+
+            <label>
+              End date
+              <input type="date" [(ngModel)]="form.endDate" />
+            </label>
+
+            <label>
+              Start time
+              <input type="time" [(ngModel)]="form.startTime" />
+            </label>
+
+            <label>
+              Timezone
+              <input
+                type="text"
+                [(ngModel)]="form.timezone"
+                placeholder="Africa/Nairobi"
+              />
+            </label>
+
+            <label>
+              Location format
+              <select [(ngModel)]="form.locationType">
+                <option value="online">Online</option>
+                <option value="in-person">In person</option>
+                <option value="hybrid">Hybrid</option>
+              </select>
+            </label>
+
+            <label>
+              Venue / Meeting details
+              <input
+                type="text"
+                [(ngModel)]="form.venue"
+                placeholder="Venue, city, or meeting platform"
+              />
+            </label>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3>03 / Registration and pricing</h3>
+
+          <div class="form-grid">
+            <label>
+              Admission
+              <select [(ngModel)]="form.admission">
+                <option value="free">Free</option>
+                <option value="paid">Paid</option>
+              </select>
+            </label>
+
+            @if (form.admission === 'paid') {
+              <label>
+                Currency
+                <select [(ngModel)]="form.currency">
+                  <option value="KES">KES</option>
+                  <option value="USD">USD</option>
+                  <option value="EUR">EUR</option>
+                  <option value="GBP">GBP</option>
+                </select>
+              </label>
+
+              <label>
+                Ticket / Entry price
+                <input
+                  type="number"
+                  min="0"
+                  [(ngModel)]="form.ticketPrice"
+                  placeholder="0"
+                />
+              </label>
+            }
+
+            <label>
+              Registration / Ticket URL
+              <input
+                type="url"
+                [(ngModel)]="form.registrationLink"
+                placeholder="https://..."
+              />
+            </label>
+          </div>
+        </div>
+
+        @if (form.type === 'hackathon') {
+          <div class="form-section hackathon-section">
+            <h3>04 / Hackathon details</h3>
+
+            <label>
+              Eligibility
+              <textarea
+                rows="3"
+                [(ngModel)]="form.eligibility"
+                placeholder="Who is allowed to participate?"
+              ></textarea>
+            </label>
+
+            <label>
+              Requirements
+              <textarea
+                rows="3"
+                [(ngModel)]="form.requirements"
+                placeholder="Skills, tools, technology, participation requirements..."
+              ></textarea>
+            </label>
+
+            <div class="form-grid">
+              <label>
+                Registration deadline
+                <input
+                  type="date"
+                  [(ngModel)]="form.registrationDeadline"
+                />
+              </label>
+
+              <label>
+                Team size
+                <input
+                  type="text"
+                  [(ngModel)]="form.teamSize"
+                  placeholder="e.g. 1–4 participants"
+                />
+              </label>
+            </div>
+
+            <label>
+              Tracks / Themes
+              <textarea
+                rows="2"
+                [(ngModel)]="form.tracks"
+                placeholder="AI, Web3, Climate Tech, Open Innovation..."
+              ></textarea>
+            </label>
+
+            <label>
+              Prizes and benefits
+              <textarea
+                rows="3"
+                [(ngModel)]="form.prizes"
+                placeholder="Cash prizes, mentorship, credits, certificates..."
+              ></textarea>
+            </label>
+
+            <label>
+              Submission link
+              <input
+                type="url"
+                [(ngModel)]="form.submissionLink"
+                placeholder="https://..."
+              />
+            </label>
+          </div>
+        }
+
+        <div class="form-section">
+          <h3>{{ form.type === 'hackathon' ? '05' : '04' }} / Branding and visibility</h3>
+
+          <label>
+            Cover image URL
+            <input
+              type="url"
+              [(ngModel)]="form.imageUrl"
+              placeholder="https://..."
+            />
+          </label>
+
+          @if (form.imageUrl) {
+            <img
+              class="image-preview"
+              [src]="form.imageUrl"
+              alt="Event cover preview"
+            />
+          }
+
+          <label>
+            Organizer website
+            <input
+              type="url"
+              [(ngModel)]="form.organizerWebsite"
+              placeholder="https://..."
+            />
+          </label>
+
+          <label class="checkbox-label">
+            <input type="checkbox" [(ngModel)]="form.featured" />
+            Feature this listing on the Events page later
+          </label>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="cancel-btn"
+          (click)="closeModal()"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="button"
+          class="draft-btn"
+          [disabled]="isSaving()"
+          (click)="saveListing('draft')"
+        >
+          Save draft
+        </button>
+
+        <button
+          type="button"
+          class="publish-btn"
+          [disabled]="isSaving()"
+          (click)="saveListing('published')"
+        >
+          {{ isSaving() ? 'Saving...' : 'Publish listing' }}
+        </button>
+      </div>
+    </section>
+  </div>
+}

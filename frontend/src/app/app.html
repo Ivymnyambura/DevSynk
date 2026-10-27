@@ -1,4 +1,9 @@
 
+
+@if (
+  !router.url.startsWith('/admin') &&
+  !router.url.startsWith('/dashboard')
+) {
 <div class="site-shell" id="home">
 
 
@@ -206,9 +211,28 @@
 
       
 <div class="drawer-navigation drawer-upcoming">
-  <div class="drawer-placeholder">
-    <span>Dashboard</span>
-  </div>
+  <a
+  routerLink="/dashboard"
+  class="drawer-dashboard-link"
+  (click)="closeMenu()"
+>
+  <span>Dashboard</span>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="17"
+    height="17"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M5 12h14" />
+    <path d="m12 5 7 7-7 7" />
+  </svg>
+</a>
 
   <div class="drawer-placeholder">
     <span>Projects</span>
@@ -264,8 +288,8 @@
 @if (router.url === '/events') {
   <router-outlet />
 } @else {
-
   <main>
+
     <section class="hero">
       
 
@@ -1096,3 +1120,7 @@
 
 
 </div>
+
+} @else {
+  <router-outlet />
+}

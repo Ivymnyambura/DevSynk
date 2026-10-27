@@ -3945,3 +3945,26 @@ button {
     transition: none;
   }
 }
+.drawer-dashboard-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-radius: 10px;
+  color: #39276f;
+  background: rgba(118, 84, 188, 0.08);
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.drawer-dashboard-link:hover {
+  background: rgba(118, 84, 188, 0.16);
+  transform: translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer-dashboard-link {
+    transition: none;
+  }
+}
